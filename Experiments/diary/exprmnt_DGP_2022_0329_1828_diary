@@ -1,0 +1,38 @@
+
+generate_data_again =
+
+     1
+
+
+output_dir =
+
+    '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/neoexp_after_March27_meeting'
+
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+{Unrecognized field name "discount".
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('simulate_choice', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/simulate_choice.m', 128)" style="font-weight:bold">simulate_choice</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/simulate_choice.m',128,0)">line 128</a>)
+discount = inp.discount; % discount = 0 during estimation
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('simulate_data_mainscript', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/simulate_data_mainscript.m', 19)" style="font-weight:bold">simulate_data_mainscript</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/simulate_data_mainscript.m',19,0)">line 19</a>)
+[quant_pred,psamt_pred,prob_vis_storepair,Q,jbest]=simulate_choice(theta,inp);
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_simulate_March12', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/main_simulate_March12.m', 56)" style="font-weight:bold">main_simulate_March12</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/main_simulate_March12.m',56,0)">line 56</a>)
+    simulate_data_mainscript(params,N_select,input_dir,output_dir,seed)
+} 
+opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/simulate_choice.m',128,0)
+main_simulate_March12
+
+seed =
+
+      123457
+
+
+DiaryName =
+
+    '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/diary/exprmnt_DGP_2022_0329_1831_diary'
+

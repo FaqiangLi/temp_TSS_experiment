@@ -28,7 +28,8 @@ beta3=theta(10); %  I do not know what this is
 beta_quarter=theta(11:14)'; % quarter fixed effect, just use the initial estimate
 
 % unobserved individual heterogeneity
-sigma=[0.208 0.920 0.677 1.129]; % cat/store, time varying, cat specific, store&cat specific
+% sigma=[0.208 0.920 0.677 1.129];  % problem detected March 29. 
+sigma=[1.129 0.677 0.920 0.208];  
 
 % qudratic parameters (cross cat complementarity)
 Lambda_diag=[19.852 11.239 3.802 10.536 15.952 4.360 8.901 14.062]*0.7;

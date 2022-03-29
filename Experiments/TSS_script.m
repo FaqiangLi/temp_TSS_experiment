@@ -165,12 +165,12 @@ se_1stg = reshape(se_1stg,D,1);
 % TSS_print_estimates(theta,se_1stg,inp,inp2)
 
 
-
-
 %_______________Estimation with 2nd-stage weighting matrix_________________
 inp.new_moments = true
+
+
 % load first_stage_estimates
-W2 = TSS_W_second_stage(theta,inp,inp2);
+W2 = TSS_W_second_stage_modified(theta,inp,inp2);
 inp.W = inv(W2);
 objective = @(theta)TSS_gmm(theta,inp);
 
@@ -180,8 +180,10 @@ check_obj_val = objective(theta_DGP);
 
 disp(['At true DGP with W=firststage-optimal, the objective function is ' num2str(check_obj_val) ] )
 disp('Initial bound for the second stage is (first stage estimates):')
+theta
 
-TSS_optimization_2
+
+TSS_optimization_3
 % save second_stage_estimates
 
 %________________Standard errors___________________________________________

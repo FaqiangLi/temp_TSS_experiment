@@ -30,7 +30,9 @@ end
 %dir = 'REVISEDPRICE/';
 dir_faqiang_cluster = '/storage/work/f/fxl146/WalmexNutrition/StructuralCode/neoexperiment_6000_real_dgpfixedfromraw/';
 dir_faqiang_local = '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/neoexperiment_6000_real_dgpfixedfromraw/';
-dir = dir_faqiang_local;
+dir_faqiang_local_afterMarch22meeting = '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/neoexp_after_March27_meeting/';
+
+dir = dir_faqiang_local_afterMarch22meeting;
 
 cat_USIs = table2array(readtable([dir 'cat_USIs.csv']));
 cat_spends = table2array(readtable([dir 'cat_spends.csv']));

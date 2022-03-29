@@ -1,0 +1,379 @@
+
+generate_data_again =
+
+     1
+
+
+output_dir =
+
+    '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/neoexp_after_March27_meeting'
+
+
+N_select =
+
+        6000
+
+
+check_pos_ix =
+
+        6891
+
+No purchase records have all zero category
+The data have been simualated. The seed is123457
+Now one can go back to working script to conduct the subsequent task.
+if system_dependent('IsDebugMode')==1, dbcont; end
+TSS_script
+
+seed =
+
+       12345
+
+
+str =
+
+    'Y'
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('readtable')" style="font-weight:bold">readtable</a>
+Unable to find or open
+'/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/neoexperiment_6000_real_dgpfixedfromraw/cat_USIs.csv'. Check
+the path and filename or file permissions.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('TSS_input', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/TSS_input.m', 35)" style="font-weight:bold">TSS_input</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/TSS_input.m',35,0)">line 35</a>)
+cat_USIs = table2array(readtable([dir 'cat_USIs.csv']));
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('TSS_script', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/TSS_script.m', 62)" style="font-weight:bold">TSS_script</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/TSS_script.m',62,0)">line 62</a>)
+[inp,inp2] = TSS_input(N,cat_comb,IV_comb,outofsample);
+} 
+matlab.internal.language.introspective.errorDocCallback('readtable')
+TSS_script
+
+seed =
+
+       12345
+
+
+str =
+
+    'Y'
+
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('readtable')" style="font-weight:bold">readtable</a>
+Unable to find or open
+'/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/neoexperiment_6000_real_dgpfixedfromraw/cat_USIs.csv'. Check
+the path and filename or file permissions.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('TSS_input', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/TSS_input.m', 37)" style="font-weight:bold">TSS_input</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/TSS_input.m',37,0)">line 37</a>)
+cat_USIs = table2array(readtable([dir 'cat_USIs.csv']));
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('TSS_script', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/TSS_script.m', 62)" style="font-weight:bold">TSS_script</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/TSS_script.m',62,0)">line 62</a>)
+[inp,inp2] = TSS_input(N,cat_comb,IV_comb,outofsample);
+} 
+TSS_script
+
+seed =
+
+       12345
+
+
+str =
+
+    'Y'
+
+________________________________________________________
+________________________________________________________
+Households:                                     2000
+Observations:                                   6000
+2-store visits:                                 2914
+2-store visits, %:                                48.6
+Mean distance, all, km:                           7.2
+Mean distance, 1-stop shoppers, km:               5
+Mean distance, 2-stop shoppers, km:               9.4
+Mean spending, all, pounds:                       9.2
+Mean spending, 1-stop shoppers, pounds:           7.1
+Mean spending, 2-stop shoppers, pounds:           11.4
+Mean spending on Bak, pounds:                      2.2
+Mean spending on Dai, pounds:                      0.7
+Mean spending on Dri, pounds:                      0.9
+Mean spending on Dry, pounds:                      1
+Mean spending on Fru, pounds:                      1.2
+Mean spending on Hou, pounds:                      1.2
+Mean spending on Mea, pounds:                      1.7
+Mean spending on Mil, pounds:                      0.3
+Mean income per cap., all, pounds:               941.9
+Mean income per cap., 1-stop shoppers, pounds:   912.3
+Mean income per cap., 2-stop shoppers, pounds:   973.2
+Mean number of adults, all:                        4.35
+Mean number of children, all:                      0
+Mean age, all:                                    9999
+________________________________________________________
+Data are ready.
+There are 281 moment conditions to estimate 102 parameters.
+
+inp = 
+
+  <a href="matlab:helpPopup struct" style="font-weight:bold">struct</a> with fields:
+
+                 fix: 'empty'
+            instr_ix: [286×1 logical]
+              period: [6000×1 double]
+            nu_const: [2000×1 double]
+          storeindex: [465×2 double]
+            quantity: [6000×465×2×8 double]
+      positiveamount: [6000×465×2×8 double]
+    storepairvisited: [6000×465 double]
+             IV_comb: {8×1 cell}
+                  AH: [6000×6 double]
+                  AP: {8×1 cell}
+                  AS: [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 … ]
+                ACi2: [6000×465×2 double]
+                 ACi: [6000×465×2 double]
+                 A1i: [465×1 logical]
+                 Asp: [6000×465×6 double]
+            cat_comb: {4×1 cell}
+                nupr: [2000×1 double]
+             nugamma: [2000×1×1×2 double]
+                   C: 465
+               price: [6000×30×8 double]
+                   N: 2000
+                  NT: 6000
+                   T: 3
+                   J: 30
+                   K: 8
+                   S: 9
+                   L: 20
+                  LP: 4
+                  L1: 1
+                  L2: 7
+                  L3: 2
+                  Li: 5
+                  on: [6000×1 double]
+                  oj: [30×1 double]
+                  ok: [8×1 double]
+                  o2: [2×1 double]
+                  os: [9×1 double]
+                 olA: [20×1 double]
+                 ix2: [900×1 logical]
+                   x: [6000×30 double]
+                  xp: [6000×30×30×2 double]
+                   z: [6000×7 double]
+                 nu1: [2000×30×8 double]
+                 nu2: [2000×1×8 double]
+                 nu3: [6000×1 double]
+              chain0: [6000×30×9 double]
+            discount: 0
+         new_moments: 0
+       cat_1st_instr: 1
+              nu3_78: [2000×1 double]
+                   W: [274×274 double]
+                  Wb: [6×6 double]
+                  Lb: 6
+                  LL: 281
+                 olb: [6×1 double]
+             Ncommon: [2000×30 double]
+                  It: [64×1 logical]
+      storeindex_C2J: [930×30 double]
+                  p0: [6000×465×2×8 double]
+             R0_star: [2000×1 double]
+             Q0_star: [2000×8 double]
+             D0_star: [2000×8×30 double]
+            OS0_star: [2000×1 double]
+           DST0_star: [2000×1 double]
+           R_in_star: [2000×28 double]
+           R_cr_star: [2000×28 double]
+                   D: 102
+
+At true DGP with W=inv(ZZ), the objective function is 0.42269
+Initial bound is (true theta +- 0.5 |true theta|) : 
+
+theta =
+
+    2.0850
+    1.4180
+    1.0960
+    1.9010
+    2.6650
+    1.1150
+    2.3090
+    1.0000
+    0.4560
+    0.4770
+    0.4979
+    0.1698
+    0.2726
+    0.2816
+    0.1627
+    0.2080
+    0.9200
+    0.6770
+    1.1290
+   13.8964
+    7.8673
+    2.6614
+    7.3752
+   11.1664
+    3.0520
+    6.2307
+    9.8434
+    1.2194
+    0.9576
+    0.1883
+    0.4004
+    0.0532
+    1.2873
+   23.0167
+    7.5280
+    0.4400
+   10.2690
+    0.3940
+    7.0896
+    0.1431
+    4.0685
+   17.4459
+    0.0394
+    0.0394
+    4.6255
+    1.1037
+    0.2516
+    0.1865
+   -0.0006
+    0.0180
+    0.0186
+    0.0687
+   -0.0876
+    0.0557
+   -0.0068
+   -0.5318
+    0.0323
+   -0.0282
+    0.0773
+    0.0766
+    0.1548
+   -0.0424
+   -0.0174
+   -0.9928
+    0.3224
+    0.1617
+    0.0007
+    0.0034
+   -0.0596
+    0.0868
+    0.1374
+   -0.2478
+    0.1107
+   -0.0369
+   -1.1641
+   -0.0365
+    0.0322
+   -0.0793
+   -0.1041
+   -3.1612
+    0.0062
+    0.0325
+   -0.0075
+    0.0969
+    0.4679
+    0.1690
+   -1.2010
+    0.6008
+    0.3446
+    0.7164
+   -1.1705
+    0.0439
+   -0.0520
+   -0.0927
+   -0.0927
+   -0.2433
+    0.0583
+   -0.1501
+    0.4203
+    0.0635
+    0.2858
+    0.0446
+
+theta_DGP(39:end)
+
+ans =
+
+    7.0896
+    0.1431
+    4.0685
+   17.4459
+    0.0394
+    0.0394
+    4.6255
+    1.1037
+    0.2516
+    0.1865
+   -0.0006
+    0.0180
+    0.0186
+    0.0687
+   -0.0876
+    0.0557
+   -0.0068
+   -0.5318
+    0.0323
+   -0.0282
+    0.0773
+    0.0766
+    0.1548
+   -0.0424
+   -0.0174
+   -0.9928
+    0.3224
+    0.1617
+    0.0007
+    0.0034
+   -0.0596
+    0.0868
+    0.1374
+   -0.2478
+    0.1107
+   -0.0369
+   -1.1641
+   -0.0365
+    0.0322
+   -0.0793
+   -0.1041
+   -3.1612
+    0.0062
+    0.0325
+   -0.0075
+    0.0969
+    0.4679
+    0.1690
+   -1.2010
+    0.6008
+    0.3446
+    0.7164
+   -1.1705
+    0.0439
+   -0.0520
+   -0.0927
+   -0.0927
+   -0.2433
+    0.0583
+   -0.1501
+    0.4203
+    0.0635
+    0.2858
+    0.0446
+
+
+if system_dependent('IsDebugMode')==1, dbquit all; end
+simulate_choice
+{Not enough input arguments.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('simulate_choice', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/simulate_choice.m', 5)" style="font-weight:bold">simulate_choice</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/simulate_choice.m',5,0)">line 5</a>)
+ix2 = inp.ix2;
+} 
+main_simulate_March12
+
+seed =
+
+      123457
+
+
+DiaryName =
+
+    '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/diary/exprmnt_DGP_2022_0329_1938_diary'
+

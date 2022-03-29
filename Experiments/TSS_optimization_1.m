@@ -20,6 +20,9 @@ clear lb ub rng
 % initial population
 population = X0;
 
+% March 27 meeting: change to constrain sigma to be positive
+faqiang_lowerbound = -inf*ones(D,1);
+faqiang_lowerbound(16:19,1)=0;
 
 cf = 0.30;          % crossover fraction
 EC = 5;             % elite count
@@ -46,7 +49,7 @@ while t<=R
     disp('optimization starting')
     tic
     [x,fval_ga,exitflag,output,population] = ga(objective,D,[],[],[],[],...
-        [],[],[],options);
+        faqiang_lowerbound,[],[],options);
     FileName = ['Output/' '1stg','_',datestr(now,'yyyy_mmdd_HHMM'),...
         '_Run',num2str(t),'of',num2str(R)];
     save(FileName,'x','fval_ga','population')

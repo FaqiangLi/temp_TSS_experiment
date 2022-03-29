@@ -1,0 +1,57 @@
+
+generate_data_again =
+
+     1
+
+
+output_dir =
+
+    '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/neoexp_after_March27_meeting'
+
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+
+N_select =
+
+        6000
+
+
+check_pos_ix =
+
+        6891
+
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+{Unrecognized function or variable 'JK'.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('simulate_data_mainscript', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/simulate_data_mainscript.m', 92)" style="font-weight:bold">simulate_data_mainscript</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/simulate_data_mainscript.m',92,0)">line 92</a>)
+purchase_quant=zeros(NT,JK); % to construct cat_spend.csv
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_simulate_March12', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/main_simulate_March12.m', 56)" style="font-weight:bold">main_simulate_March12</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/main_simulate_March12.m',56,0)">line 56</a>)
+    simulate_data_mainscript(params,N_select,input_dir,output_dir,seed)
+} 
+main_simulate_March12
+
+seed =
+
+      123457
+
+
+DiaryName =
+
+    '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/diary/exprmnt_DGP_2022_0329_1913_diary'
+

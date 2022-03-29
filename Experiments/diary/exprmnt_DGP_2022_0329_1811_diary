@@ -1,0 +1,36 @@
+
+generate_data_again =
+
+     1
+
+
+output_dir =
+
+    '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/neoexp_after_March27_meeting'
+
+if system_dependent('IsDebugMode')==1, dbcont; end
+{Index in position 2 exceeds array bounds.
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('clip_simulate_choice_probability', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/clip_simulate_choice_probability.m', 36)" style="font-weight:bold">clip_simulate_choice_probability</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/clip_simulate_choice_probability.m',36,0)">line 36</a>)
+temp_ntindex = unique(NTjchars2(:,[1 2 3]),'stable','rows');
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('run', '/Applications/MATLAB_R2022a.app/toolbox/matlab/lang/run.m', 91)" style="font-weight:bold">run</a> (<a href="matlab: opentoline('/Applications/MATLAB_R2022a.app/toolbox/matlab/lang/run.m',91,0)">line 91</a>)
+evalin('caller', strcat(script, ';'));
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('simulate_data_mainscript', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/simulate_data_mainscript.m', 14)" style="font-weight:bold">simulate_data_mainscript</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/simulate_data_mainscript.m',14,0)">line 14</a>)
+run clip_simulate_choice_probability.m
+
+Error in <a href="matlab:matlab.internal.language.introspective.errorDocCallback('main_simulate_March12', '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/main_simulate_March12.m', 56)" style="font-weight:bold">main_simulate_March12</a> (<a href="matlab: opentoline('/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/main_simulate_March12.m',56,0)">line 56</a>)
+    simulate_data_mainscript(params,N_select,input_dir,output_dir,seed)
+} 
+main_simulate_March12
+
+seed =
+
+      123457
+
+
+DiaryName =
+
+    '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/diary/exprmnt_DGP_2022_0329_1813_diary'
+

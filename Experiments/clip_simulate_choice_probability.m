@@ -44,7 +44,8 @@ if sum(test)~=0
     return
 end
 
-% Transform all data to be sort time id store
+% Transform all data to be sort time id store (the original stata files are
+% sorted in id time store (March 20))
 NTjchars2 = sortrows(NTjchars2,[3 1 5]);
 NTJfirmnum2 = sortrows(NTJfirmnum2,[3 1]);
 Hhchars2 = sortrows(Hhchars2,1);
@@ -64,7 +65,7 @@ J=30; % Choice set size,
 C=J*(J+1)/2; % number of store-store combination
 S=9; % number of firm. Currently, let it be 9, identical to their's code.
 NT=N*T; % Total number of purchase in the sample
-
+JK=J*K;
 % reformat hhchars matrix
 hhchars=repmat(Hhchars2,T,1);
 
@@ -94,7 +95,7 @@ end
 
 
 % hh code
-hh_codeTN0 = cat_prices(:,1);   % first column in cat_spends is househould number: household codes/week
+hh_codeTN0 = cat_prices(:,1);   
 hh_codeN0 = unique(hh_codeTN0,'stable');    % list of unique household codes
 N0 = length(hh_codeN0);         % total number of households
 hh_ix_1=1:N;
@@ -337,8 +338,8 @@ inp.L1=L1; % number of store chars enterring into taste mu
 inp.L2=L2; % number of hh chars enterring into taste mu
 inp.L3=L3; % number of maximum store allowed to visit, L3=2
 inp.Li=Linteract; % number of interactive elasticity
-inp.chain0 = squeeze(chain9(:,:,1,:));  % cat_comb = cell(4,1), this is a struct of category combination.
-
+inp.chain0 = squeeze(chain9(:,:,1,:));  
+inp.cat_comb = cat_comb;
 % storeindex is a C*2 matrix, where C=(J*(J-1))/2. It just lists every
 % posible combination with the order as
 % introduced in its first and second col. Its first col is (1-J)*J times
@@ -353,4 +354,8 @@ inp.nugamma=reshape(nugamma,N,1,1,2); % NT*1*1*2, nugamma = randn(N,1,1,2)
 inp.nu1=nu1; % see below
 inp.nu2=nu2;
 inp.nu3=nu3;
+
+
+inp.discount = 0; % for use in counterfactuals
+inp.fix = 'empty'; % for use when calculating conditional derivatives
 

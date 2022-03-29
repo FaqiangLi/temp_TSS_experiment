@@ -1,0 +1,41 @@
+
+generate_data_again =
+
+     1
+
+
+output_dir =
+
+    '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/neoexp_after_March27_meeting'
+
+
+N_select =
+
+        6000
+
+
+check_pos_ix =
+
+        6891
+
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+No purchase records have all zero category
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbcont; end
+if system_dependent('IsDebugMode')==1, dbquit; end
+main_simulate_March12
+
+seed =
+
+      123457
+
+
+DiaryName =
+
+    '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/diary/exprmnt_DGP_2022_0329_1922_diary'
+
