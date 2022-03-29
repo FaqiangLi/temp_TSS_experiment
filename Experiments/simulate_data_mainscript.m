@@ -187,15 +187,15 @@ final_test=sum(sum(cat_spends(:,4:end),2)>0,1)==N_select*T;
 dir=ITAM_output_dir;
 cd(dir)
 
-writematrix(sameday)
-writematrix(store_visit)
-writematrix(Hhchars2)
-writematrix(NTjchars2)
-writematrix(NTJfirmnum2)
-writematrix(cat_prices)
-writematrix(cat_iv)
-writematrix(cat_USIs)
-writematrix(cat_spends)
+writematrix(sameday,'sameday.csv')
+writematrix(store_visit,'store_visit.csv')
+writematrix(Hhchars2,'HHchars2.csv')
+writematrix(NTjchars2,'NTJchars2.csv')
+writematrix(NTJfirmnum2,'NTJfirmnum2.csv')
+writematrix(cat_prices,'cat_prices.csv')
+writematrix(cat_iv,'cat_iv.csv')
+writematrix(cat_USIs,'cat_USIs.csv')
+writematrix(cat_spends,'cat_spends.csv')
 
 
 display(['The data have been simualated. The seed is', num2str(seed_in_use)])

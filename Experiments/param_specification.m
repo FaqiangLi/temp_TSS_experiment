@@ -6,8 +6,10 @@
 % estimates.
 clear
 
-
-load('first_stage_estimates_TSS.mat')
+% This is an estimate provided by TSS in its AER code, I use it to read
+% beta3, beta_quarter and firmcat fixed effect. Other estimate value are
+% consistent with TSS's paper
+load('first_stage_estimates.mat')
 
 % cat taste parameters 
 beta0=[2.085 1.418 1.096 1.901 2.665 1.115 2.309];
@@ -22,7 +24,7 @@ beta1=0.456; % log floor space
 % household parameters (betaz)
 %  beta3 and quarter fixed effect are included here,from 'first_stage_estimates_forGenData.mat'
 beta2=0.477; % household size
-beta3=theta(10); %  I do not know 
+beta3=theta(10); %  I do not know what this is 
 beta_quarter=theta(11:14)'; % quarter fixed effect, just use the initial estimate
 
 % unobserved individual heterogeneity
@@ -44,12 +46,14 @@ gamma2=[10.269 0.394]; % distance, sd
 
 % category-firm fixed effect
 firmcat = theta(39:end)';
-temp_id = find(firmcat<0);
-firmcat(temp_id)= 0 - firmcat(temp_id);
-% increase Soriana and Aurerea
-mulitplier = 7;
-firmcat(1:8) = mulitplier*firmcat(1:8) ;
-firmcat(9:16) = 1*firmcat(9:16) ;
+% temp_id = find(firmcat<0);
+% firmcat(temp_id)= 0 - firmcat(temp_id);
+% % increase Soriana and Aurerea
+% mulitplier = 7;
+% firmcat(1:8) = mulitplier*firmcat(1:8) ;
+% firmcat(9:16) = 1*firmcat(9:16) ;
+multiplier = 7;
+firmcat(1:8)=multiplier*abs(firmcat(1:8));
 
 
 % delete the confounding 
@@ -75,10 +79,12 @@ theta_header = ["Bakery(all are TSS's cat @@)";"Diary";"Drink";"Dry Groc";"Fruit
 
 
 % give the theta a different name
-theta_health_morepredictable=theta;
+theta_health_predictable=theta;
 
-save theta_health_morepredictable theta_health_morepredictable theta_header
+save theta_health_predictable theta_health_predictable theta_header
 
 
+
+clear
 
 

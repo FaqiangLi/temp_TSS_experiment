@@ -1,6 +1,4 @@
-function [quant_pred,psamt_pred,prob_vis_storepair,Q,jbest] = simulate_choice(theta,inp)
-
-% copy from TSS_quantities.m. No change.
+function [quant_pred,psamt_pred,prob_vis_storepair,Q,jbest] = TSS_quantities(theta,inp)
 
 ix2 = inp.ix2;
 price = inp.price;

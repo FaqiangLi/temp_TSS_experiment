@@ -2,9 +2,9 @@
 %% Script clip to reformat exogeneous variables.
 
 % input variable for this clip:
-% parameter_customized,total_households,input_dir,output_dir,seed 
+% parameter_customized,total_households,input_dir,output_dir,seed
 
-seed_in_use = seed; 
+seed_in_use = seed;
 rng(seed_in_use);
 
 % Directories
@@ -14,6 +14,10 @@ ITAM_mfile_dir = pwd;
 
 
 theta = parameter_customized;
+
+% Switch on or off for distance construction, true for triangular,false for
+% two trip method
+onetrip_dist = false;
 
 %% import characteristics from the stata
 
@@ -25,8 +29,10 @@ Hhchars2 = table2array(readtable('Hhchars2_stata.csv'));
 cat_prices = table2array(readtable('cat_prices_stata.csv'));
 cat_iv = cat_prices;
 
+cd(ITAM_mfile_dir)
+
 % test whether the identifiers of different datasets are aligned
-test = zeros(4,1); 
+test = zeros(4,1);
 temp_ntindex = unique(NTjchars2(:,[1 2 3]),'stable','rows');
 temp_nindex  = unique(NTJfirmnum2(:,1),'stable');
 test(1) = sum(sum(temp_ntindex~=cat_prices(:,1:3)));
@@ -58,63 +64,13 @@ J=30; % Choice set size,
 C=J*(J+1)/2; % number of store-store combination
 S=9; % number of firm. Currently, let it be 9, identical to their's code.
 NT=N*T; % Total number of purchase in the sample
-JK=J*K; % Total number of store choice-category
-
-M=19; % Total number of household characteristics
-totalweeks=156; % number of weeks sampled. Their code uses 156.
-
-n_firm=16;
-
-%% Reformat matrices
 
 % reformat hhchars matrix
 hhchars=repmat(Hhchars2,T,1);
 
-% generate and save individual heterogeneity
-nu = randn(N,J+1+1,K);
-nu1 = nu(:,1:J,:); % N*J*K, \nu_{ijk}
-nu2 = nu(:,J+1,:); % N*1*K, \nu_{ik}
-nu3 = randn(NT,1); % NT*1, \nu_{it}
-nupr = rand(N,1,1);  % nu for price, i.e. the alpha
-nupr = sqrt(-2*log(nupr)); % rayleigh distribution
-nugamma = randn(N,1,1,2); % There are \nu_i1 and \nu_i2 so 2 dim
-U = rand(N,5);
-nu_const = randn(N,1); % N*1, \nu_{i}
-% There is a whole lot process of generating a nu3_78 in the original
-% script and it is a trivial term. See what I commented away below.
-% It gives a random shock for those households that have week id
-% equal to 78 the same shock received by them in nu3
-nu3_78 = randn(N,1);
-% hhcode6000 = hh_codeTN0(hh_ix_2);
-% hh_78 = hhcode6000(ix_w78);
-% for i=1:length(hh_78)
-%     nu3_78(hh_78(i) == hh_code) = nu3(ix_w78(i));
-% end
-
-cd(ITAM_output_dir)
-save nu_genrating_choice.mat nu1 nu2 nu3 nu3_78 nupr nugamma U nu_const
+%% Reformat matrices
 
 
-hh_codeTN0 = cat_prices(:,1);   % first column in cat_spends is househould number: household codes/week
-hh_codeN0 = unique(hh_codeTN0,'stable');    % list of unique household codes
-N0 = length(hh_codeN0);         % total number of households
-hh_ix_1=1:N; 
-hh_ix_2=1:NT;
-
-
-cd(ITAM_mfile_dir)
-
-% Switch on or off for distance construction, true for triangular,false for
-% two trip method
-onetrip_dist = false;
-
-% vectors predefined for expanding the matrix
-on = ones(NT,1);
-oj = ones(J,1);
-ok = ones(K,1);
-o2 = ones(2,1);
-os = ones(S,1);
-oc = ones(C,1);
 
 % cat_comb, see table 3 of the paper, this is just to assume
 % complementarity between categroies in the Lambda matrix
@@ -124,52 +80,43 @@ cat_comb{2} = [8 2];
 cat_comb{3} = [1 5 7]; % notice this means, 1,5,7 can mutally complementary, i.e. 15, 17 or 57
 cat_comb{4} = 6;
 % Number of interactive term, in table 3, this is part of Lambda estimate in model 2
-Li=0;
 Linteract = 0;
 L = size(cat_comb,1);
 for l=1:L
     c_cat_l = cat_comb{l};
     no_cat = size(c_cat_l,2);
     if no_cat>1
-        combs = combnk(c_cat_l,2); % generate a combination list of cat comb
+        combs = combnk(c_cat_l,2);
         Linteract = Linteract + size(combs,1);
     end
-end % Linteract=1+1+3+0=5  in this context
-Li=Linteract;
-
-% Price
-temp_price=cat_prices(:,4:end);
-price=zeros(NT,J,K);
-for k=1:K
-    price(:,:,k) = temp_price(:,k:K:J*K);
 end
 
 
-% Iseful indexing matrices for store pair
-temp = true(J,J);
-temp = triu(temp);  % upper triangulor
-ix_JJ2C = false(J*J,1);
-ix_JJ2C(temp) = true;
-ix2=ix_JJ2C;
-J1 = (1:J)';
-storeindex = zeros(J*J,2);          % all combinations (j,j'), 1<=j,j'<=J
-storeindex(:,1) = kron(ones(J,1),J1);
-storeindex(:,2) = kron(J1,ones(J,1));
-storeindex = storeindex(ix_JJ2C,:); % combinations (j,j') s.th 1<=j<=j'<=J
-onestop = storeindex(:,1)==storeindex(:,2);
+
+% hh code
+hh_codeTN0 = cat_prices(:,1);   % first column in cat_spends is househould number: household codes/week
+hh_codeN0 = unique(hh_codeTN0,'stable');    % list of unique household codes
+N0 = length(hh_codeN0);         % total number of households
+hh_ix_1=1:N;
+hh_ix_2=1:NT;
+
+
 
 % Time indicators
-weeks = cat_prices(:,2); % the second identifier is week
+weeks = cat_prices(:,2);
 weeks = unique(weeks);
-week78 = weeks(78); % middle week of sample period (78/156)
-week0 = cat_prices(:,2);            
+week78 = 78; % middle week of sample period (78/156)
+
+
+
+week0 = cat_prices(:,2);
 % observations that are in 'week 78' (middle week of sample period)
 ix_w78 = find(week0 == week78); % pinpoint the all positions of week 78
 period = cat_prices(:,3);
-year = floor(week0/100);  
+year = floor(week0/100);
 week = week0-year*100;
 qu1 = week<14;               % quarter dummy
-qu2 = week>=14 & week<=26;  
+qu2 = week>=14 & week<=26;
 qu3 = week>=27 & week<=39;
 qu4 = week>=40;
 y2 = year==2;             % year dummy
@@ -178,10 +125,30 @@ y4 = year==4;
 quarter = [qu2 qu3 qu4 (qu4 & y2 | (qu1|qu2|qu3)& y3)  (qu4 & y3 | (qu1|qu2|qu3)& y4)];
 
 
+% vectors predefined for expanding the matrix
+on = ones(NT,1);                    % vectors predefined for expansion
+oj = ones(J,1);
+ok = ones(K,1);
+o2 = ones(2,1);
+os = ones(S,1);
+oc = ones(C,1);
+
+% Iseful indexing matrices for store pair
+temp = true(J,J);                   % store / store pair indices
+temp = triu(temp);
+ix_JJ2C = false(J*J,1);
+ix_JJ2C(temp) = true;
+J1 = (1:J)';
+storeindex = zeros(J*J,2);          % all combinations (j,j'), 1<=j,j'<=J
+storeindex(:,1) = kron(ones(J,1),J1);
+storeindex(:,2) = kron(J1,ones(J,1));
+storeindex = storeindex(ix_JJ2C,:); % combinations (j,j') s.th 1<=j<=j'<=J
+onestop = storeindex(:,1)==storeindex(:,2);
+
 % household size and income in pounds
 z = [sum(hhchars(:,[10 11]),2) hhchars(:,end)/10 quarter];
 % number of demographic characteristics (including time dummies)
-L2 = size(z,2);                     % NT x L2
+L2 = size(z,2);
 z(:,2) = z(:,2)./z(:,1);            % change income to per capita income
 
 % Household-time-store characteristics
@@ -195,10 +162,12 @@ x0(:,8) = x0(:,8)/1000;
 storechars = zeros(NT,J,4);
 for i=1:N
     for t=1:T
-        ix_temp = x0(:,1)==hh_codeN0(hh_ix_1(i)) & x0(:,3)==t; % third col is week's index,1,2 or 3, col 2 is exact week index in a year
+        ix_temp = x0(:,1)==hh_codeN0(hh_ix_1(i)) & x0(:,3)==t;
         storechars(i+N*(t-1),:,:) = x0(ix_temp,6:end);      % logsalesarea easting northing dist
     end
 end
+
+
 x = storechars(:,:,1);
 % number of store characteristics enterring into consumer's taste
 L1 = size(x,3);
@@ -207,7 +176,6 @@ log_stsize = storechars(:,:,1);
 east = storechars(:,:,2);
 north = storechars(:,:,3);
 dist = storechars(:,:,4);
-% L3 is how maximum stores are we allowed for each purchase
 L3 = 2;
 dist = reshape(dist,NT,J,1);
 dist = dist(:,:,oj);
@@ -219,6 +187,7 @@ east = reshape(east,NT,J,1);
 east = east(:,:,oj);
 east_t = permute(east,[1 3 2]);         % transpose
 % Set two ways of distance construction
+
 xp_triangular = zeros(NT,J,J,L3);       % distance home -> A -> B -> home
 for i=1:NT
     % dummy for two stores
@@ -234,6 +203,7 @@ for i=1:NT
     xp_triangular(i,:,:,2) = ~eye(J).*dist_comb + eye(J).*(distA*2);
     % eye(J) gives the diagonal the (j,0) "pairs"
 end
+
 xp_twotrips = zeros(NT,J,J,L3);         % distance home -> A -> home -> B -> home
 for i=1:NT
     % dummy for two stores
@@ -245,7 +215,7 @@ for i=1:NT
     xp_twotrips(i,:,:,2) = ~eye(J).*dist_sum + eye(J).*(distA*2);
     % eye(J) gives the diagonal the (j,0) "pairs"
 end
-% Select one into onetrip_dist
+
 if onetrip_dist
     xp = xp_triangular;
 else
@@ -253,29 +223,29 @@ else
 end
 clear xp_triangular xp_twotrips
 
+
 % Firm number mapping
 firmnum = NTJfirmnum2(:,4:end); % NT*J, storing firm number
 firmnum9 = zeros(NT,J);
-% Baseline                      1
-frmcl9{1} = 'Basline';
-% 24 is actually Coscto, but I make it to be the baselin category
+% ASDA                      1
+frmcl9{1} = 'Asda';
 ix_temp = (firmnum==24);
 firmnum9(ix_temp) = 1;
-% Soriana                     2	
-frmcl9{2} = 'Soriana';
+% DISC (ALDI, LIDL, NETTO)  2
+frmcl9{2} = 'Discounter';
 ix_temp = (firmnum==103);
 firmnum9(ix_temp) = 2;
-% BODEGA AURRERA              3
-frmcl9{3} = 'Aurrera';
+% ICELAND                   3
+frmcl9{3} = 'Iceland';
 ix_temp = (firmnum==12);
 firmnum9(ix_temp) = 3;
-% Walmex                      4
-frmcl9{4} = 'Costco';
+% MORRISONS                 4
+frmcl9{4} = 'Morrisons';
 ix_temp = (firmnum==131);
 firmnum9(ix_temp) = 4;
 % MS                        5
 frmcl9{5} = 'MS';
-ix_temp =( firmnum==27);
+ix_temp =( firmnum==27);    % trad
 firmnum9(ix_temp) = 5;
 % OTHER (OTHER, BUDGEN, KWIKSAVE, SAFEWAY, COOP, SOMERFIELD) 6
 frmcl9{6} = 'Other';
@@ -296,6 +266,7 @@ firmnum9(ix_temp) = 9;
 
 firmnum9(firmnum9==0) = 1;
 
+
 % used later to add in firm category fixed effect in the utility
 chain9 = zeros(NT,J,9);
 for s=1:9
@@ -304,7 +275,41 @@ end
 % NxTxJxKxS. Expand for categories
 chain9 = reshape(chain9,NT,J,1,9);
 chain9 = chain9(:,:,ok,:);
-chain0 = squeeze(chain9(:,:,1,:)); % this chain0 is used for constructing \xi_jk
+
+% generate and save individual heterogeneity
+nu = randn(N,J+1+1,K);
+nu1 = nu(:,1:J,:);
+nu2 = nu(:,J+1,:);
+nu3 = randn(NT,1);
+nupr = rand(N,1,1);
+nupr = sqrt(-2*log(nupr)); % rayleigh distribution
+nugamma = randn(N,1,1,2);
+U = rand(N,5);
+nu_const = randn(N,1);
+% There is a whole lot process of generating a nu3_78 in the original
+% script and it is a trivial term. See what I commented away below.
+% It gives a random shock for those households that have week id
+% equal to 78 the same shock received by them in nu3
+nu3_78 = randn(N,1);
+% hhcode6000 = hh_codeTN0(hh_ix_2);
+% hh_78 = hhcode6000(ix_w78);
+% for i=1:length(hh_78)
+%     nu3_78(hh_78(i) == hh_code) = nu3(ix_w78(i));
+% end
+
+cd(ITAM_output_dir)
+save nu_genrating_choice.mat nu1 nu2 nu3 nu3_78 nupr nugamma U nu_const
+
+
+cd(ITAM_mfile_dir)
+
+% Price
+p0 = cat_prices(:,4:end);
+P = zeros(NT,J,K);
+for k=1:K
+    temp2 = p0(:,k:K:J*K);
+    P(:,:,k) = temp2;
+end
 
 
 %%  Store all data to inp, a struct
@@ -313,8 +318,8 @@ chain0 = squeeze(chain9(:,:,1,:)); % this chain0 is used for constructing \xi_jk
 % simulate_choice.m
 
 % Read data from inp.. (NoComment means scalar)
-inp.ix2=ix2; % ix*J*J*2*C, upper tri of store pair matrix
-inp.price=price; %  NT*J*K, price
+inp.ix2=ix_JJ2C; % ix*J*J*2*C, upper tri of store pair matrix
+inp.price=P; %  NT*J*K, price
 inp.C=C; % store combination, C=30*29/2=435
 inp.NT=N*T; % total sampled purchase, N=2000,T=3
 inp.T=T; % periodsa
@@ -331,11 +336,8 @@ inp.z=z; % N*4, 4 chars of matrix hhchars
 inp.L1=L1; % number of store chars enterring into taste mu
 inp.L2=L2; % number of hh chars enterring into taste mu
 inp.L3=L3; % number of maximum store allowed to visit, L3=2
-inp.Li=Li; % number of interactive elasticity
-inp.chain0=chain0; % NT*J*S, logical array to pick stores that are in a particular chain.
-inp.cat_comb=cat_comb; % cat_comb = cell(4,1), this is a struct of category combination.
-CC = size(cat_comb,1); % CC=4, there are four category combination
-
+inp.Li=Linteract; % number of interactive elasticity
+inp.chain0 = squeeze(chain9(:,:,1,:));  % cat_comb = cell(4,1), this is a struct of category combination.
 
 % storeindex is a C*2 matrix, where C=(J*(J-1))/2. It just lists every
 % posible combination with the order as
@@ -347,7 +349,7 @@ inp.storeindex=storeindex; % C*2
 % All the individual unobserved characteristic
 inp.nupr=nupr; % N*1*1
 inp.nu_const=nu_const ; % NT*1
-inp.nugamma=nugamma; % NT*1*1*2, nugamma = randn(N,1,1,2)
+inp.nugamma=reshape(nugamma,N,1,1,2); % NT*1*1*2, nugamma = randn(N,1,1,2)
 inp.nu1=nu1; % see below
 inp.nu2=nu2;
 inp.nu3=nu3;

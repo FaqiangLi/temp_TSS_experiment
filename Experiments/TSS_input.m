@@ -31,19 +31,20 @@ end
 dir_faqiang_cluster = '/storage/work/f/fxl146/WalmexNutrition/StructuralCode/neoexperiment_6000_real_dgpfixedfromraw/';
 dir_faqiang_local = '/Users/faqiangmacpro/Dropbox/temp_TSS_experiment/Experiments/neoexperiment_6000_real_dgpfixedfromraw/';
 dir = dir_faqiang_local;
-cat_USIs = table2array(readtable([dir 'cat_USIs.txt']));
-cat_spends = table2array(readtable([dir 'cat_spends.txt']));
-cat_prices = table2array(readtable([dir 'cat_prices.txt']));
+
+cat_USIs = table2array(readtable([dir 'cat_USIs.csv']));
+cat_spends = table2array(readtable([dir 'cat_spends.csv']));
+cat_prices = table2array(readtable([dir 'cat_prices.csv']));
 if price_instr
-    cat_iv = table2array(readtable([dir 'cat_iv.txt']));
+    cat_iv = table2array(readtable([dir 'cat_iv.csv']));
 else
     cat_iv = cat_prices;
 end
-hhchars = table2array(readtable([dir 'Hhchars2.txt']));
-ntjchars = table2array(readtable([dir 'NTjchars2.txt']));
-ntjfirmnum = table2array(readtable([dir 'NTJfirmnum2.txt']));
-store_visit = table2array(readtable([dir 'store_visit.txt']));
-sameday = table2array(readtable([dir 'sameday.txt']));
+hhchars = table2array(readtable([dir 'HHchars2.csv']));
+ntjchars = table2array(readtable([dir 'NTJchars2.csv']));
+ntjfirmnum = table2array(readtable([dir 'NTJfirmnum2.csv']));
+store_visit = table2array(readtable([dir 'store_visit.csv']));
+sameday = table2array(readtable([dir 'sameday.csv']));
 
 hhchars = repmat(hhchars,T,1);      % hhchars are constant across time
 

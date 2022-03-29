@@ -5,10 +5,10 @@
 % estimation.
 
 % To see the parameter value, see parparam_predictable_nosample_selection.m
+run param_specification.m
+
 
 clear
-
-
 
 % seed is 123457 throughout in this script
 seed = 123457 % this is the seed for generating data
@@ -26,7 +26,7 @@ rng(seed);
 
 
 % Diary
-DiaryName = ['exprmnt','_',datestr(now,'yyyy_mmdd_HHMM'),'_','content'];
+DiaryName = ['exprmnt_DGP','_',datestr(now,'yyyy_mmdd_HHMM'),'_','diary'];
 DiaryName = [pwd ,'/diary/', DiaryName]
 diary(DiaryName)
 generate_data_again=1
@@ -34,7 +34,7 @@ generate_data_again=1
 % Workspace that stores all the output of the simulation, namely the
 % simulated (endogenous) varialbe and the exogenous data for structural
 % estimation. The output will be formated as in TSS's paper.
-output_dir = [pwd,'/neoexperiment_6000_real_dgpfixedfromraw']
+output_dir = [pwd,'/neoexp_after_March27_meeting']
 
 if generate_data_again==1
 
