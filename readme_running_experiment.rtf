@@ -1,0 +1,41 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\froman\fcharset0 Times-Roman;\f1\froman\fcharset0 Times-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red251\green2\blue7;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c14913\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww11740\viewh15240\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs48 \cf2 \expnd0\expndtw0\kerning0
+Below are introduction of the experiment.\
+\
+The experiment includes two procedures. First we simulate the data. Second we estimate the model using the original TSS's code. \
+\
+I have adapted the specification of the working directory so it should be able to run smoothly without changing directory. This is done by using the pwd (print working directory). Before running any scripts, please change directory to "whatever/Experiment/".\
+\
+For the first part, please run \cf3 main_simulate_March12.m\cf2 . It will generate the data stored in the "output_dir". The parameter used to generate the results this time can be found in param_specification.m. You can run it with you preferred data generating process. Change the name stored in the variable if you like at the bottom of the \cf3 param_specification.m\cf2 . In this early March experiment, I randomly select 6000 households out of near 7000 households that have three periods of positive purchase. The number of candidate households are 7500. In other words somehow 7500-7000=500 households have some periods of zero purchase under the parameter values used in this experiment. \
+\
+All the scripts starting with "simulate" prefix is written for simulating data.\
+\
+For the second part, note first that the process in TSS_script in the code includes three stages of estimation. All use genetic algorithm. \
+1.preliminary stage: W=inv(Z'Z), Z is the instrument. initial bound formed by true DGP for the optimization, #moment=274 (these are all the g^(1) moments in the paper). \
+2.first stage: W=optimal weighting matrix constructed by the prelim stage estimates., which also are used to form initial bounds for this stage, the first stage optimization,\'a0with\'a0 #moment=274+7=281 (by specifying new_moment=true)\
+3. second stage: W=optimal weighting matrix constructed by the first stage estimates., which also are used to form initial bounds for this stage, the first stage optimization,\'a0with\'a0 #moment=274+7=281 (by specifying new_moment=true)\
+\
+Therefore for this part, following the paper, please just run 
+\f1\b \cf3 TSS_script.m
+\f0\b0 \cf2 . All the scripts starting with TSS is written for estimation.\
+\
+Note that four folders are added to the workspace. \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+One named "fq_matrix" is where I stored the dta files. They feed me with the 7500 candidate households\uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+One named "neoexperiment_6000_real_dgpfixedfromraw" is where I used to store all the text files, the outcome of the simulation\uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+One is for storing diary(/diary/). \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	4.	}\expnd0\expndtw0\kerning0
+One is for storing result (/Output/). I stored the 40 (20 prelim stage + 20 first stage) runs of estimates here in the output and the running log in the diary. Note that the "2stg" prefix actually corresponds to the first stage and "1stg" prefix corresponds to the prelimnary stage. I will fix this inconsistency in the future. \uc0\u8232 \
+}

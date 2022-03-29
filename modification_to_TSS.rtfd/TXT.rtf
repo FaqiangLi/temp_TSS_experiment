@@ -1,0 +1,55 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid1\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid101\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\margl1440\margr1440\vieww12040\viewh13900\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs48 \cf0 \
+Changes I made to make the scripts running smoothly. \
+\
+\
+1. TSS_script\
+ \
+\pard\tx220\tx720\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li720\fi-720\pardirnatural\partightenfactor0
+\ls1\ilvl0\cf0 {\listtext	\uc0\u8259 	}Add seed for reproducibility\
+{\listtext	\uc0\u8259 	}Change the first stage initial bound to be surrounding the true data generating process to make convergence faster\
+{\listtext	\uc0\u8259 	}Evaluate the objective function at the true parameter when going into each step of estimation \
+{\listtext	\uc0\u8259 	}Display estimates result before progressing to further stage of estimation\
+{\listtext	\uc0\u8259 	}\
+\pard\tx720\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+2. TSS_input\
+\
+\pard\tx220\tx720\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\li720\fi-720\pardirnatural\partightenfactor0
+\ls2\ilvl0\cf0 {\listtext	\uc0\u8259 	}change working directory to fit our workspace\
+{\listtext	\uc0\u8259 	}Specify \'93first_time\'94 to be true so that everytime we generate new data instead of saving data in the workspace\
+{\listtext	\uc0\u8259 	}Dirctly set variable \'93week78\'94 as 78 for our week index is somewhat different than theirs\
+{\listtext	\uc0\u8259 	}Change when applicable 2*N0 to be T*N0 \
+{\listtext	\uc0\u8259 	}Change year indicator definition from, say year==2014 to year==3\
+{\listtext	\uc0\u8259 	}Assign chain number in our own way\
+\pard\tx720\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+\cf0 \
+\
+3. TSS_optimization\
+\
+Split it into to optimization script, TSS_optimization_1 and TSS_optimization_2. In the current experiment, TSS_optimization_1 is for preliminary estimation, and TSS_optimization_2 is meant to run the first and the second stage. \
+\
+I also change the total number of runs to be 20 instead of 150.\
+\
+\
+\
+4. \cf2 \expnd0\expndtw0\kerning0
+TSS_W_second_stage. \
+\
+I changed it to TSS_W_second_stage_modified.m.\
+\
+There is a mistake in their code. When constructing weighting matrix, at some step, they add only two periods instead of three peridos\
+\
+\
+5. TSS_acov\
+\
+Since the original TSS_acov.m uses TSS_W_second_stage.m, I changed it to use TSS_W_second_stage_modified.m.}
